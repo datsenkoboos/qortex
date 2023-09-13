@@ -9,11 +9,12 @@
         :flat="selectedId === id ? true : false"
         :class="selectedId === id ? 'bg-blue-700 text-white' : ''"
         @click="select(id)"
+        :data-testid="`album-${id}`"
       >
-        <QCardSection>
+        <QCardSection :data-testid="`album-${id}-artist`">
           {{ album.artist.name }}
         </QCardSection>
-        <QCardSection>
+        <QCardSection :data-testid="`album-${id}-release`">
           {{ album.releaseYear }}
         </QCardSection>
       </QBtn>

@@ -1,2 +1,2 @@
-import AlbumPicker from './AlbumPicker';
-export { AlbumPicker };
+import AlbumSelector from './AlbumSelector';
+export { AlbumSelector };
