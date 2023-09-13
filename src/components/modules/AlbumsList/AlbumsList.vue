@@ -12,4 +12,8 @@ import { useDataStore } from '@/stores';
 import { AlbumCard } from '@/components';
 
 const dataStore = useDataStore();
+
+onMounted(() => {
+  dataStore.albums
+}),
 </script>
