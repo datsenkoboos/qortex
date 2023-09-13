@@ -1,5 +1,10 @@
 <template>
-  <QCard flat bordered class="text-lg text-center w-full" text-color="black">
+  <QCard
+    flat
+    bordered
+    class="border-black text-lg text-center w-full"
+    text-color="black"
+  >
     <QCardSection>
       {{ data.name }}
     </QCardSection>

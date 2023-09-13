@@ -1,6 +1,11 @@
 <template>
-  <QCard flat bordered class="text-lg text-center w-full" text-color="black">
-    <QCardSection horizontal>
+  <QCard
+    flat
+    bordered
+    class="border-black text-lg text-center w-full"
+    text-color="black"
+  >
+    <QCardSection horizontal class="h-full">
       <QCardSection>
         <QCardSection class="font-semibold text-xl">
           {{ data.artist.name }}
@@ -9,9 +14,9 @@
           {{ data.releaseYear }}
         </QCardSection>
       </QCardSection>
-      <QCardSection class="w-full p-0">
+      <QCardSection class="bg-blue-700 h-full w-full p-0">
         <QCardSection
-          class="bg-blue-700 text-white w-full p-5"
+          class="text-white w-full p-5"
           v-for="song in data.content"
           :key="song.name"
         >

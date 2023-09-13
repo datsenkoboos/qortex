@@ -1,6 +1,6 @@
 <template>
   <header
-    class="border-b-[1px] h-[64px] flex items-center justify-between px-[10%]"
+    class="border-black border-b-[1px] h-[64px] flex items-center justify-between px-[10%]"
   >
     <AppLogo />
     <nav class="font-semibold flex gap-5">
