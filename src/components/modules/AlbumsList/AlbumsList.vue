@@ -1,7 +1,7 @@
 <template>
   <div class="grid gap-5 grid-cols-3">
     <AlbumCard
-      v-for="[id, album] in Object.entries(dataStore.albums)"
+      v-for="[id, album] in Object.entries(dataStore.getAlbums())"
       :key="id"
       :data="album"
     />
@@ -12,8 +12,4 @@ import { useDataStore } from '@/stores';
 import { AlbumCard } from '@/components';
 
 const dataStore = useDataStore();
-
-onMounted(() => {
-  dataStore.albums
-}),
 </script>

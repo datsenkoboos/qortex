@@ -4,6 +4,7 @@
       v-for="[id, artist] in Object.entries(dataStore.artists)"
       :key="id"
       :data="artist"
+      :data-testid="`artist-${id}`"
     />
   </div>
 </template>

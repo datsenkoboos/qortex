@@ -24,8 +24,10 @@ const useDataStore = defineStore('data', {
     artists: (state): typeof state.data.artists => {
       return state.data.artists;
     },
-    albums: (state): typeof state.data.albums => {
-      const data = JSON.parse(JSON.stringify(state.data.albums));
+  },
+  actions: {
+    getAlbums(): typeof this.data.albums {
+      const data = JSON.parse(JSON.stringify(this.data.albums));
 
       if (!localStorage.getItem('albums')) {
         return data;
@@ -39,9 +41,7 @@ const useDataStore = defineStore('data', {
       }
       return data;
     },
-  },
-  actions: {
-    addSong(albumId: number, name: string, numberInAlbum: number) {
+    addSong(albumId: number, name: string) {
       if (!localStorage.getItem('albums')) {
         localStorage.setItem('albums', JSON.stringify({}));
       }
@@ -49,8 +49,19 @@ const useDataStore = defineStore('data', {
         localStorage.getItem('albums')!
       );
       data[albumId] = data[albumId]
-        ? [...data[albumId], { name, numberInAlbum }]
-        : [{ name, numberInAlbum }];
+        ? [
+            ...data[albumId],
+            {
+              name,
+              numberInAlbum: this.getAlbums()[albumId].content.length + 1,
+            },
+          ]
+        : [
+            {
+              name,
+              numberInAlbum: this.getAlbums()[albumId].content.length + 1,
+            },
+          ];
       localStorage.setItem('albums', JSON.stringify(data));
     },
   },

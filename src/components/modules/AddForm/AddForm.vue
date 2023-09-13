@@ -23,17 +23,6 @@
         error-message="Заполните поле"
         data-testid="nameInput"
       />
-      <QInput
-        min="1"
-        v-model="numberInAlbum"
-        name="numberInAlbum"
-        label="Введите номер песни в альбоме"
-        type="number"
-        outlined
-        :error="numberInAlbumError"
-        error-message="Заполните поле"
-        data-testid="numberInAlbumInput"
-      />
       <QBtn type="submit" flat class="bg-blue-700 text-white w-full" size="md"
         >Добавить</QBtn
       >
@@ -48,24 +37,18 @@ import { AlbumSelector } from './components';
 const dataStore = useDataStore();
 const name = ref();
 const nameError = ref();
-const numberInAlbum = ref();
-const numberInAlbumError = ref();
 const albumId = ref();
 const showDialog = ref(false);
 
 function submit() {
   nameError.value = false;
-  numberInAlbumError.value = false;
 
   if (!name.value) {
     nameError.value = true;
   }
-  if (!numberInAlbum.value) {
-    numberInAlbumError.value = true;
-  }
 
-  if (!nameError.value && !numberInAlbumError.value) {
-    dataStore.addSong(albumId.value, name.value, numberInAlbum.value);
+  if (!nameError.value) {
+    dataStore.addSong(albumId.value, name.value);
     showDialog.value = true;
   }
 }

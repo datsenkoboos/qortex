@@ -6,7 +6,7 @@ import { useDataStore } from '@/stores';
 
 describe('AlbumSelector', () => {
   describe('state', () => {
-    it('dataStore.albums - should render albums correctly', () => {
+    it('dataStore.getAlbums() - should render albums correctly', () => {
       const wrapper = shallowMount(AlbumSelector, {
         global: {
           plugins: [createPinia()],

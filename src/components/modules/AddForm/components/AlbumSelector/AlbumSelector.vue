@@ -3,7 +3,7 @@
     <label class="text-lg">Выберите альбом</label>
     <div class="!flex w-full gap-5 overflow-x-auto">
       <QBtn
-        v-for="[id, album] in Object.entries(dataStore.albums)"
+        v-for="[id, album] in Object.entries(dataStore.getAlbums())"
         :key="id"
         :outline="selectedId !== id ? true : false"
         :flat="selectedId === id ? true : false"

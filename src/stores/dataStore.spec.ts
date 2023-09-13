@@ -35,11 +35,13 @@ describe('Data Store', () => {
       const store = useStore();
       expect(store.artists).toStrictEqual(artists);
     });
-    test('albums - should return @/data albums if no localStorage albums were set', () => {
+  });
+  describe('actions', () => {
+    test('getAlbums - should return @/data albums if no localStorage albums were set', () => {
       const store = useStore();
-      expect(store.albums).toStrictEqual(albums);
+      expect(store.getAlbums()).toStrictEqual(albums);
     });
-    test('albums - should return @/data albums filled with songs from localStorage if localStorage albums were set', () => {
+    test('getAlbums - should return @/data albums filled with songs from localStorage if localStorage albums were set', () => {
       const store = useStore();
       const firstSong = { name: 'First Song', numberInAlbum: -1 };
       const secondSong = { name: 'Second Song', numberInAlbum: 100 };
@@ -49,7 +51,7 @@ describe('Data Store', () => {
           '1': [firstSong, secondSong],
         })
       );
-      expect(store.albums).toStrictEqual({
+      expect(store.getAlbums()).toStrictEqual({
         ...albums,
         '1': {
           artist: albums['1'].artist,
@@ -58,21 +60,33 @@ describe('Data Store', () => {
         },
       });
     });
-  });
-  describe('actions', () => {
-    test('addSong - should add song to localStorage', () => {
+    test('addSong - should add song to localStorage and set valid number in album', () => {
       const store = useStore();
-      const firstSong = { name: 'First Song', numberInAlbum: -1 };
-      const secondSong = { name: 'Second Song', numberInAlbum: 100 };
+      const firstSong = { name: 'First Song' };
+      const secondSong = { name: 'Second Song' };
 
-      store.addSong(1, firstSong.name, firstSong.numberInAlbum);
+      store.addSong(1, firstSong.name);
       expect(JSON.parse(LocalStorageMock.getItem('albums'))).toStrictEqual({
-        '1': [firstSong],
+        '1': [
+          {
+            ...firstSong,
+            numberInAlbum: store.getAlbums()['1'].content.length,
+          },
+        ],
       });
 
-      store.addSong(1, secondSong.name, secondSong.numberInAlbum);
+      store.addSong(1, secondSong.name);
       expect(JSON.parse(LocalStorageMock.getItem('albums'))).toStrictEqual({
-        '1': [firstSong, secondSong],
+        '1': [
+          {
+            ...firstSong,
+            numberInAlbum: store.getAlbums()['1'].content.length - 1,
+          },
+          {
+            ...secondSong,
+            numberInAlbum: store.getAlbums()['1'].content.length,
+          },
+        ],
       });
     });
   });
